@@ -1,6 +1,5 @@
 import base64
 import binascii
-import re
 from typing import Any, Dict, List, Optional
 
 from multiversx_sdk_core.bech32 import bech32_encode, convertbits
@@ -96,7 +95,7 @@ class TransactionDecoder:
             data_components = decoded_data.split("@")
 
             args = data_components[1:]
-            if all(self.is_smart_contract_argument(x) for x in args):
+            if all(self.is_smart_contract_call_argument(x) for x in args):
                 metadata.function_name = data_components[0]
                 metadata.function_args = args
 
@@ -251,7 +250,7 @@ class TransactionDecoder:
     def is_address_valid(self, address: str) -> bool:
         return len(binascii.unhexlify(address)) == 32
 
-    def is_smart_contract_argument(self, arg: str) -> bool:
+    def is_smart_contract_call_argument(self, arg: str) -> bool:
         if not self.is_hex(arg):
             return False
         if len(arg) % 2 != 0:
@@ -259,7 +258,11 @@ class TransactionDecoder:
         return True
 
     def is_hex(self, value: str) -> bool:
-        return not bool(re.search("[^a-f0-9]", value, re.IGNORECASE))
+        try:
+            bytes.fromhex(value)
+            return True
+        except ValueError:
+            return False
 
     def base64_to_hex(self, str: str) -> str:
         return binascii.hexlify(base64.b64decode(str)).decode("ascii")

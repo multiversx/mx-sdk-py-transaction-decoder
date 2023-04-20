@@ -34,6 +34,40 @@ class TestTransactionDecoder:
                 assert (
                     metadata.transfers[0].properties.identifier == "LKMEX-aab910-2fb4e9"
                 )
+    
+    def test_sc_call(self):
+        tx_to_decode = TransactionToDecode()
+
+        tx_to_decode.sender = (
+            "erd1wcn58spj6rnsexugjq3p2fxxq4t3l3kt7np078zwkrxu70ul69fqvyjnq2"
+        )
+        tx_to_decode.receiver = (
+            "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th"
+        )
+        tx_to_decode.value = "0"
+        tx_to_decode.data = (
+            "d2l0aGRyYXdHbG9iYWxPZmZlckAwMTczZDA="
+        )
+
+        decoder = TransactionDecoder()
+        metadata = decoder.getTransactionMetadata(tx_to_decode)
+
+        assert (
+            metadata.sender
+            == "erd1wcn58spj6rnsexugjq3p2fxxq4t3l3kt7np078zwkrxu70ul69fqvyjnq2"
+        )
+        assert (
+            metadata.receiver
+            == "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th"
+        )
+        assert (
+            metadata.function_name
+            == "withdrawGlobalOffer"
+        )
+        assert (
+            metadata.function_args
+            == ['0173d0']
+        )
 
     def test_multi_esdt_nft_transfer(self):
         tx_to_decode = TransactionToDecode()
