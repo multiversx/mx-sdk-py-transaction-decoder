@@ -14,7 +14,7 @@ class TestTransactionDecoder:
         tx_to_decode.data = "RVNEVE5GVFRyYW5zZmVyQDRjNGI0ZDQ1NTgyZDYxNjE2MjM5MzEzMEAyZmI0ZTlAZTQwZjE2OTk3MTY1NWU2YmIwNGNAMDAwMDAwMDAwMDAwMDAwMDA1MDBkZjNiZWJlMWFmYTEwYzQwOTI1ZTgzM2MxNGE0NjBlMTBhODQ5ZjUwYTQ2OEA3Mzc3NjE3MDVmNmM2YjZkNjU3ODVmNzQ2ZjVmNjU2NzZjNjRAMGIzNzdmMjYxYzNjNzE5MUA="
 
         decoder = TransactionDecoder()
-        metadata = decoder.getTransactionMetadata(tx_to_decode)
+        metadata = decoder.get_transaction_metadata(tx_to_decode)
 
         assert (
             metadata.sender
@@ -50,7 +50,7 @@ class TestTransactionDecoder:
         )
 
         decoder = TransactionDecoder()
-        metadata = decoder.getTransactionMetadata(tx_to_decode)
+        metadata = decoder.get_transaction_metadata(tx_to_decode)
 
         assert (
             metadata.sender
@@ -81,7 +81,7 @@ class TestTransactionDecoder:
         tx_to_decode.data = "TXVsdGlFU0RUTkZUVHJhbnNmZXJAMDAwMDAwMDAwMDAwMDAwMDA1MDBkZjNiZWJlMWFmYTEwYzQwOTI1ZTgzM2MxNGE0NjBlMTBhODQ5ZjUwYTQ2OEAwMkA0YzRiNGQ0NTU4MmQ2MTYxNjIzOTMxMzBAMmZlM2IwQDA5Yjk5YTZkYjMwMDI3ZTRmM2VjQDRjNGI0ZDQ1NTgyZDYxNjE2MjM5MzEzMEAzMTAyY2FAMDEyNjMwZTlhMjlmMmY5MzgxNDQ5MUA3Mzc3NjE3MDVmNmM2YjZkNjU3ODVmNzQ2ZjVmNjU2NzZjNjRAMGVkZTY0MzExYjhkMDFiNUA="
 
         decoder = TransactionDecoder()
-        metadata = decoder.getTransactionMetadata(tx_to_decode)
+        metadata = decoder.get_transaction_metadata(tx_to_decode)
 
         assert (
             metadata.sender
@@ -127,7 +127,7 @@ class TestTransactionDecoder:
         )
 
         decoder = TransactionDecoder()
-        metadata = decoder.getTransactionMetadata(tx_to_decode)
+        metadata = decoder.get_transaction_metadata(tx_to_decode)
 
         assert (
             metadata.sender

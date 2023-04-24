@@ -1,1 +1,1 @@
-multiversx-sdk-core==0.3.3
+multiversx-sdk-core>=0.3.3

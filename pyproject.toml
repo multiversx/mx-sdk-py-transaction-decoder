@@ -21,7 +21,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-  "multiversx-sdk-core==0.3.3"
+  "multiversx-sdk-core>=0.3.3"
 ]
 
 [project.urls]

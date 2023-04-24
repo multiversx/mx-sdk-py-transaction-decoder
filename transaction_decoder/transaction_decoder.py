@@ -62,22 +62,22 @@ class TokenTransferProperties:
 
 
 class TransactionDecoder:
-    def getTransactionMetadata(
+    def get_transaction_metadata(
         self, transaction: TransactionToDecode
     ) -> TransactionMetadata:
         metadata = self.get_normal_transaction_metadata(transaction)
 
-        esdtMetadata = self.getEsdtTransactionMetadata(metadata)
-        if esdtMetadata:
-            return esdtMetadata
+        esdt_metadata = self.get_esdt_transaction_metadata(metadata)
+        if esdt_metadata:
+            return esdt_metadata
 
-        nftMetadata = self.get_nft_transfer_metadata(metadata)
-        if nftMetadata:
-            return nftMetadata
+        nft_metadata = self.get_nft_transfer_metadata(metadata)
+        if nft_metadata:
+            return nft_metadata
 
-        multiMetadata = self.get_multi_transfer_metadata(metadata)
-        if multiMetadata:
-            return multiMetadata
+        multi_metadata = self.get_multi_transfer_metadata(metadata)
+        if multi_metadata:
+            return multi_metadata
 
         return metadata
 
@@ -90,7 +90,7 @@ class TransactionDecoder:
         metadata.value = int(transaction.value)
 
         if transaction.data:
-            decoded_data = self.base64Decode(transaction.data)
+            decoded_data = self.base64_decode(transaction.data)
 
             data_components = decoded_data.split("@")
 
@@ -209,7 +209,7 @@ class TransactionDecoder:
 
         return result
 
-    def getEsdtTransactionMetadata(
+    def get_esdt_transaction_metadata(
         self, metadata: TransactionMetadata
     ) -> Optional[TransactionMetadata]:
         if metadata.function_name != "ESDTTransfer":
@@ -275,10 +275,7 @@ class TransactionDecoder:
             return 0
         return int(hex, 16)
 
-    def base64Encode(self, s: str) -> str:
-        return base64.b64encode(s.encode("utf-8")).decode("utf-8")
-
-    def base64Decode(self, s: str) -> str:
+    def base64_decode(self, s: str) -> str:
         return base64.b64decode(s.encode("utf-8")).decode("utf-8")
 
     def hex_to_number(self, hex: str) -> int:
