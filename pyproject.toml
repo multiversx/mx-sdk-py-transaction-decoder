@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[project]
+name = "multiversx-sdk-transaction-decoder"
+version = "0.1.0"
+authors = [
+  { name="MultiversX" },
+]
+license = "MIT"
+description = "Transaction Decoder for MultiversX Python SDK."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "multiversx-sdk-core>=0.3.3"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/multiversx/mx-sdk-py-transaction-decoder"
