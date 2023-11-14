@@ -279,7 +279,7 @@ class TransactionDecoder:
         return base64.b64decode(s.encode("utf-8")).decode("utf-8")
 
     def hex_to_number(self, hex: str) -> int:
-        return int(hex, 16)
+        return int(hex or "00", 16)
 
     def bech32_encode(self, address: str) -> str:
         pub_key = bytes.fromhex(address)
