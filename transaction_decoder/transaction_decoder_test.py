@@ -144,3 +144,79 @@ class TestTransactionDecoder:
             if metadata.transfers[0].properties:
                 assert metadata.transfers[0].properties.collection == "TEST-2e40d7"
                 assert metadata.transfers[0].properties.identifier == "TEST-2e40d7"
+    
+    def test_multi_transfer_fungible_and_meta_esdt(self):
+        tx_to_decode = TransactionToDecode()
+
+        tx_to_decode.sender = (
+            "erd1lkrrrn3ws9sp854kdpzer9f77eglqpeet3e3k3uxvqxw9p3eq6xqxj43r9"
+        )
+        tx_to_decode.receiver = (
+            "erd1lkrrrn3ws9sp854kdpzer9f77eglqpeet3e3k3uxvqxw9p3eq6xqxj43r9"
+        )
+        tx_to_decode.value = "0"
+        tx_to_decode.data = (
+            "TXVsdGlFU0RUTkZUVHJhbnNmZXJAMDAwMDAwMDAwMDAwMDAwMDA1MDBkZjNiZWJlMWFmYTEwYzQwOTI1ZTgzM2MxNGE0NjBlMTBhODQ5ZjUwYTQ2OEAwMkA0YzRiNGQ0NTU4MmQ2MTYxNjIzOTMxMzBAMmZlM2IwQDA5Yjk5YTZkYjMwMDI3ZTRmM2VjQDU1NTM0NDQzMmQzMzM1MzA2MzM0NjVAMDBAMDEyNjMwZTlhMjlmMmY5MzgxNDQ5MUA3MDYxNzk1ZjZkNjU3NDYxNWY2MTZlNjQ1ZjY2NzU2ZTY3Njk2MjZjNjVAMGVkZTY0MzExYjhkMDFiNUA="
+        )
+
+        decoder = TransactionDecoder()
+        metadata = decoder.get_transaction_metadata(tx_to_decode)
+
+        assert (
+            metadata.sender
+            == "erd1lkrrrn3ws9sp854kdpzer9f77eglqpeet3e3k3uxvqxw9p3eq6xqxj43r9"
+        )
+        assert (
+            metadata.receiver
+            == "erd1qqqqqqqqqqqqqpgqmua7hcd05yxypyj7sv7pffrquy9gf86s535qxct34s"
+        )
+
+        assert metadata.value == 0
+        assert metadata.function_name == "pay_meta_and_fungible"
+        assert metadata.function_args == ["0ede64311b8d01b5", ""]
+
+        if metadata.transfers:
+            assert metadata.transfers[0].value == 45925073746530627023852
+            if metadata.transfers[0].properties:
+                assert metadata.transfers[0].properties.collection == "LKMEX-aab910"
+                assert metadata.transfers[0].properties.identifier == "LKMEX-aab910-2fe3b0"
+            
+            assert metadata.transfers[1].value == 1389278024872597502641297
+            if metadata.transfers[1].properties:
+                assert metadata.transfers[1].properties.token == "USDC-350c4e"
+
+    def test_multi_transfer_fungible_esdt(self):
+        tx_to_decode = TransactionToDecode()
+
+        tx_to_decode.sender = (
+            "erd1lkrrrn3ws9sp854kdpzer9f77eglqpeet3e3k3uxvqxw9p3eq6xqxj43r9"
+        )
+        tx_to_decode.receiver = (
+            "erd1lkrrrn3ws9sp854kdpzer9f77eglqpeet3e3k3uxvqxw9p3eq6xqxj43r9"
+        )
+        tx_to_decode.value = "0"
+        tx_to_decode.data = (
+            "TXVsdGlFU0RUTkZUVHJhbnNmZXJAMDAwMDAwMDAwMDAwMDAwMDA1MDBkZjNiZWJlMWFmYTEwYzQwOTI1ZTgzM2MxNGE0NjBlMTBhODQ5ZjUwYTQ2OEAwMkA1MjQ5NDQ0NTJkMzAzNTYyMzE2MjYyQDAwQDA5Yjk5YTZkYjMwMDI3ZTRmM2VjQDU1NTM0NDQzMmQzMzM1MzA2MzM0NjVAQDAxMjYzMGU5YTI5ZjJmOTM4MTQ0OTE="
+        )
+
+        decoder = TransactionDecoder()
+        metadata = decoder.get_transaction_metadata(tx_to_decode)
+
+        assert (
+            metadata.sender
+            == "erd1lkrrrn3ws9sp854kdpzer9f77eglqpeet3e3k3uxvqxw9p3eq6xqxj43r9"
+        )
+        assert (
+            metadata.receiver
+            == "erd1qqqqqqqqqqqqqpgqmua7hcd05yxypyj7sv7pffrquy9gf86s535qxct34s"
+        )
+        assert metadata.value == 0
+
+        if metadata.transfers:
+            assert metadata.transfers[0].value == 45925073746530627023852
+            if metadata.transfers[0].properties:
+                assert metadata.transfers[0].properties.token == "RIDE-05b1bb"
+            
+            assert metadata.transfers[1].value == 1389278024872597502641297
+            if metadata.transfers[1].properties:
+                assert metadata.transfers[1].properties.token == "USDC-350c4e"

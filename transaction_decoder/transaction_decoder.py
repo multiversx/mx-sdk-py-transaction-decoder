@@ -180,7 +180,7 @@ class TransactionDecoder:
             value = self.hex_to_big_int(args[index])
             index += 1
 
-            if nonce:
+            if nonce and self.hex_to_number(nonce) > 0:
                 tx_metadata = TransactionMetadataTransfer()
 
                 tx_metadata.value = value
@@ -194,7 +194,7 @@ class TransactionDecoder:
 
                 tx_metadata.value = value
                 tx_metadata.properties = TokenTransferProperties()
-                tx_metadata.properties.collection = identifier
+                tx_metadata.properties.token = identifier
 
                 result.transfers.append(tx_metadata)
 
