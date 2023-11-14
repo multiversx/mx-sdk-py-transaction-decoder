@@ -180,7 +180,7 @@ class TransactionDecoder:
             value = self.hex_to_big_int(args[index])
             index += 1
 
-            if nonce:
+            if nonce and self.hex_to_number(nonce) > 0:
                 tx_metadata = TransactionMetadataTransfer()
 
                 tx_metadata.value = value
@@ -194,7 +194,7 @@ class TransactionDecoder:
 
                 tx_metadata.value = value
                 tx_metadata.properties = TokenTransferProperties()
-                tx_metadata.properties.collection = identifier
+                tx_metadata.properties.token = identifier
 
                 result.transfers.append(tx_metadata)
 
@@ -279,9 +279,10 @@ class TransactionDecoder:
         return base64.b64decode(s.encode("utf-8")).decode("utf-8")
 
     def hex_to_number(self, hex: str) -> int:
-        return int(hex, 16)
+        return int(hex or "00", 16)
 
     def bech32_encode(self, address: str) -> str:
         pub_key = bytes.fromhex(address)
         words = convertbits(pub_key, 8, 5)
+        assert words is not None
         return bech32_encode("erd", words)
