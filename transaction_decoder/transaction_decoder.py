@@ -284,4 +284,5 @@ class TransactionDecoder:
     def bech32_encode(self, address: str) -> str:
         pub_key = bytes.fromhex(address)
         words = convertbits(pub_key, 8, 5)
+        assert words is not None
         return bech32_encode("erd", words)
