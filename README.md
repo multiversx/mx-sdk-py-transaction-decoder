@@ -1,14 +1,11 @@
-# Transaction decoder for Python
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
-## Virtual Environment
-```
-python3 -m venv ./venv
-source ./venv/bin/activate
-pip install -r ./requirements.txt --upgrade
-pip install -r ./requirements-dev.txt --upgrade
-```
+This package is **deprecated**. All the functionality has been moved to the [sdk-py](https://github.com/multiversx/mx-sdk-py/tree/main) package.
 
-## Usage
+## Transaction decoder for Python
+
+#### Usage
+
 ```python
 tx = TransactionToDecode()
 tx.sender = "erd18w6yj09l9jwlpj5cjqq9eccfgulkympv7d4rj6vq4u49j8fpwzwsvx7e85"
