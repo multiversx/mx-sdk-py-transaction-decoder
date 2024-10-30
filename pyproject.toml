@@ -7,7 +7,7 @@ allow-direct-references = true
 
 [project]
 name = "multiversx-sdk-transaction-decoder"
-version = "0.3.0"
+version = "0.4.0"
 authors = [
   { name="MultiversX" },
 ]
@@ -27,3 +27,6 @@ dependencies = [
 
 [project.urls]
 "Homepage" = "https://github.com/multiversx/mx-sdk-py-transaction-decoder"
+
+[tool.hatch.build.targets.wheel]
+packages = ["transaction_decoder"]
