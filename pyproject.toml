@@ -7,15 +7,16 @@ allow-direct-references = true
 
 [project]
 name = "multiversx-sdk-transaction-decoder"
-version = "0.2.0"
+version = "0.3.0"
 authors = [
   { name="MultiversX" },
 ]
 license = "MIT"
-description = "Transaction Decoder for MultiversX Python SDK."
+description = "Deprecated. Instead, use multiversx-sdk."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
+    "Development Status :: 7 - Inactive",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
